@@ -3,13 +3,10 @@ import chartjs from '@salesforce/resourceUrl/ChartJs';
 import chartJsPluginDatalabels from '@salesforce/resourceUrl/ChartJsPluginDatalabels';
 import { loadScript } from 'lightning/platformResourceLoader';
 
-export default class BarGraphSample extends LightningElement {  
+export default class BarGraphSample extends LightningElement {
   
   @track isChartJsInitialized = false;
   chart;
-  config;
-  chartLabels = [];
-  chartData = [];
 
   async connectedCallback() {
 
