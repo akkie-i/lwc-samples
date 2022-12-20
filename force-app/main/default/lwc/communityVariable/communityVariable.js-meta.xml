@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+  <apiVersion>55.0</apiVersion>
+  <isExposed>true</isExposed>
+  <targets>
+    <target>lightning__AppPage</target>
+    <target>lightning__RecordPage</target>
+    <target>lightning__HomePage</target>
+    <target>lightningCommunity__Page</target>
+    <target>lightningCommunity__Default</target>
+  </targets>
+  <targetConfigs>
+    <targetConfig targets="lightningCommunity__Default">
+      <property name="metaString" type="String" default="{!metaString}"></property>
+      <property name="metaBoolean" type="Boolean" default="false"></property>
+      <property name="metaInteger" type="Integer" default="0"></property>
+      <property name="metaPicklist" type="String" default="{!metaPicklist}" datasource="pick1,pick2,pick3" />
+      <property name="metaColor" type="Color" default="{!metaColor}"></property>
+      <property name="recordId" type="String" default="{!recordId}"></property>
+    </targetConfig>
+  </targetConfigs>
+</LightningComponentBundle>

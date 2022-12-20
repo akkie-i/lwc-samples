@@ -1,0 +1,17 @@
+<template>
+  <lightning-card title="npmパッケージの使用" icon-name="utility:chart">
+    <div class="slds-var-m-left_small">
+      <h2 style={style}>dayjsの動作確認</h2>
+      <p>{dayjsResult}</p>
+      <h2 style={style}>isSameOrBeforeの動作確認</h2>
+      <pre>{isSameOrBeforeResult}</pre>
+      <h2 style={style}>pdfmakeの動作確認</h2>
+      <lightning-button
+        variant="brand"
+        label="download"
+        title="start"
+        onclick={download}
+      ></lightning-button>
+    </div>
+  </lightning-card>
+</template>

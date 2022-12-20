@@ -1,21 +1,21 @@
-import { LightningElement, track, api } from 'lwc';
-import chartjs from '@salesforce/resourceUrl/ChartJs';
-import chartJsPluginDatalabels from '@salesforce/resourceUrl/ChartJsPluginDatalabels';
-import { loadScript } from 'lightning/platformResourceLoader';
+import { LightningElement, track, api } from "lwc";
+import chartjs from "@salesforce/resourceUrl/ChartJs";
+import chartJsPluginDatalabels from "@salesforce/resourceUrl/ChartJsPluginDatalabels";
+import { loadScript } from "lightning/platformResourceLoader";
 
 export default class BarGraphSample extends LightningElement {
-  
   @track isChartJsInitialized = false;
   chart;
 
   async connectedCallback() {
-
     await Promise.all([
       loadScript(this, chartjs),
-      loadScript(this, chartJsPluginDatalabels),
-    ]).then(() => {
-      this.isChartJsInitialized = true;
-    }).catch(e => console.error(e));
+      loadScript(this, chartJsPluginDatalabels)
+    ])
+      .then(() => {
+        this.isChartJsInitialized = true;
+      })
+      .catch((e) => console.error(e));
 
     if (!this.isChartJsInitialized) return;
 
@@ -27,32 +27,32 @@ export default class BarGraphSample extends LightningElement {
           {
             label: "売上",
             data: [120, 80, 97, 105, 94, 110],
-            backgroundColor: "#E1BEE7",
-          },
-        ],
+            backgroundColor: "#E1BEE7"
+          }
+        ]
       },
       options: {
         plugins: {
           tooltip: {
-            enabled: false,
+            enabled: false
           },
           datalabels: {
             font: {
-              size: 13,
+              size: 13
             },
             formatter: function (value, context) {
               return value.toString() + "万円";
-            },
-          },
-        },
+            }
+          }
+        }
       },
-      plugins: [ChartDataLabels],
+      plugins: [ChartDataLabels]
     };
 
-    const ctx = this.template.querySelector('canvas.linechart').getContext('2d');
+    const ctx = this.template.querySelector("canvas.chart").getContext("2d");
     this.chart = new window.Chart(ctx, config);
     // サイズ設定
-    this.chart.canvas.parentNode.style.height = '100%';
-    this.chart.canvas.parentNode.style.width = '100%';
+    this.chart.canvas.parentNode.style.height = "100%";
+    this.chart.canvas.parentNode.style.width = "100%";
   }
 }

@@ -1,0 +1,26 @@
+{
+  "dependencies": [
+    {
+      "lib": "dayjs",
+      "syntax": "dayjs",
+      "filename": "dayjs",
+      "exportName": "dayjs",
+      "version": "",
+      "plugins": [
+        {
+          "lib": "dayjs/plugin/isSameOrBefore",
+          "syntax": "isSameOrBefore",
+          "exportName": "isSameOrBefore"
+        }
+      ]
+    },
+    {
+      "lib": "xml-js",
+      "syntax": "* as convert",
+      "exportName": "convert",
+      "filename": "xmlJs",
+      "version": "",
+      "plugins": []
+    }
+  ]
+}
