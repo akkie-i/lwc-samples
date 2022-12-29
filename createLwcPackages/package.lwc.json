@@ -21,6 +21,14 @@
       "filename": "xmlJs",
       "version": "",
       "plugins": []
+    },
+    {
+      "lib": "lodash",
+      "syntax": "* as _",
+      "exportName": "_",
+      "filename": "lodash",
+      "version": "",
+      "plugins": []
     }
   ]
 }

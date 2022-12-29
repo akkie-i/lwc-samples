@@ -1,0 +1,130 @@
+<template>
+  <lightning-card title="CSVアップロード" icon-name="custom:custom15">
+    <div class="slds-var-p-horizontal_medium">
+      <lightning-combobox
+        name="EinsteinAnalyticsApplication"
+        label="Einstein Analytics Application"
+        placeholder="アプリケーションを選択してください"
+        options={edgemartContainers}
+        onchange={handleApplicationChange}
+      >
+      </lightning-combobox>
+
+      <template if:true={edgemartContainer}>
+        <!-- 初回以降のアップロードの場合 -->
+        <template if:true={isAfterFirstUpload}>
+          <lightning-combobox
+            name="dataset"
+            label="データセット"
+            placeholder="アップロード先のデータセットを選択してください"
+            options={edgemartAliases}
+            onchange={handleEdgemartAliasChange}
+            class="slds-var-m-top_small"
+          >
+          </lightning-combobox>
+
+          <!-- 最終アップロードのMetaDataJsonによってオペレーションが
+              が変わるためデータセットを選択するまで非活性
+          -->
+          <template if:false={isSelectedEdgemartAlias}>
+            <lightning-combobox
+              name="operation"
+              label="オペレーション"
+              value="operation"
+              placeholder="実行する処理を選択してください"
+              options={operations}
+              class="slds-var-m-top_small"
+              disabled=""
+            >
+            </lightning-combobox>
+          </template>
+          <template if:true={isSelectedEdgemartAlias}>
+            <lightning-combobox
+              name="operation"
+              label="オペレーション"
+              value={operation}
+              placeholder="実行する処理を選択してください"
+              options={operations}
+              onchange={handleOperationsChange}
+              class="slds-var-m-top_small"
+            >
+            </lightning-combobox>
+          </template>
+        </template>
+
+        <!-- 初回アップロードの場合 -->
+        <template if:true={isFirstUpload}>
+          <lightning-input
+            type="text"
+            name="dataset-name"
+            label="データセット名"
+            placeholder="半角英数字のみ、連続した_、末尾の_は不可"
+            onchange={handleNewEdgemartAliasChange}
+            class="slds-var-m-top_small"
+          ></lightning-input>
+        </template>
+
+        <!-- operationがOverwriteの場合 -->
+        <template if:true={isOperationByOverwrite}>
+          <div class="slds-var-m-top_medium" style="position: relative">
+            <div>
+              <lightning-textarea
+                name="meta-data"
+                label="メタデータ"
+                placeholder="空白、またはJson形式のCSVヘッダの構造情報を記載"
+                value={metaDataJson}
+              ></lightning-textarea>
+            </div>
+            <div style="position: absolute; top: -8px; right: 0">
+              <lightning-button
+                label="テンプレート作成"
+                title="createTemplate"
+                onclick={setTemplateMetadataJson}
+              ></lightning-button>
+            </div>
+          </div>
+        </template>
+
+        <template if:true={isSelectedApplication}>
+          <lightning-input
+            type="file"
+            name="csv"
+            label="CSV"
+            onchange={handleCsvUpload}
+            accept="text/csv"
+            class="slds-var-m-top_small"
+          ></lightning-input>
+          <span>{fileName}</span>
+        </template>
+
+        <template if:true={isInputCompleted}>
+          <div class="slds-var-m-top_small">
+            <lightning-button
+              variant="brand"
+              label="アップロード"
+              title="Primary action"
+              onclick={handleUpload}
+              class="slds-var-m-left_x-small"
+            >
+            </lightning-button>
+          </div>
+        </template>
+      </template>
+
+      <div if:true={isLoading}>
+        <lightning-spinner
+          alternative-text="Loading..."
+          variant="brand"
+          class="slds-var-m-bottom_small"
+        ></lightning-spinner>
+
+        <div class="slds-is-relative" style="top: 10px">
+          <lightning-progress-bar
+            value={loadingBar}
+            size="medium"
+          ></lightning-progress-bar>
+        </div>
+      </div>
+    </div>
+  </lightning-card>
+</template>

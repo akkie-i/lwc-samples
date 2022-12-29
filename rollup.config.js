@@ -16,21 +16,10 @@ const plugins = [
 export default [
   {
     input: [
-      "./node_modules.lwc/dayjs.js",
+      "./node_modules.lwc/jsonschema.js",
     ],
     output: {
-      dir: "./force-app/main/default/lwc/dayjs",
-      format: "es"
-    },
-    plugins: plugins,
-  },
-  {
-    input: [
-      "./node_modules.lwc/xmlJs.js",
-      "./node_modules.lwc/sax.js",
-    ],
-    output: {
-      dir: "./force-app/main/default/lwc/xmlJs",
+      dir: "./force-app/main/default/lwc/jsonschema",
       format: "es"
     },
     plugins: plugins,
